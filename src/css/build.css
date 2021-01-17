@@ -1,0 +1,46 @@
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+canvas {
+  opacity: 1;
+  /*transition: opacity 30s;*/
+  transition: opacity 4.528s;
+}
+
+canvas.fade-in {
+  opacity: 1;
+}
+
+canvas.fade-out {
+  opacity: 0.6;
+}
+
+#root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+  cursor: pointer;
+}
+
+#play-icon {
+  position: fixed;
+  top: calc(50% - 60px);
+  left: calc(50% - 60px);
+  width: 120px;
+  height: 120px;
+  fill: black;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.5516s;
+}
+
+#play-icon.fade-out {
+  opacity: 0;
+}
