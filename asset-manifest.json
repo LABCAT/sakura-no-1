@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "./static/css/main.a60116e0.chunk.css",
+    "main.js": "./static/js/main.d93c0d3a.chunk.js",
+    "main.js.map": "./static/js/main.d93c0d3a.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.34c0eeef.js",
+    "runtime-main.js.map": "./static/js/runtime-main.34c0eeef.js.map",
+    "static/js/2.d43ae54a.chunk.js": "./static/js/2.d43ae54a.chunk.js",
+    "static/js/2.d43ae54a.chunk.js.map": "./static/js/2.d43ae54a.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/main.a60116e0.chunk.css.map": "./static/css/main.a60116e0.chunk.css.map",
+    "static/js/2.d43ae54a.chunk.js.LICENSE.txt": "./static/js/2.d43ae54a.chunk.js.LICENSE.txt",
+    "static/media/sakura-no-1.5f570a37.mid": "./static/media/sakura-no-1.5f570a37.mid",
+    "static/media/sakura-no-1.68fe6d37.ogg": "./static/media/sakura-no-1.68fe6d37.ogg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.34c0eeef.js",
+    "static/js/2.d43ae54a.chunk.js",
+    "static/css/main.a60116e0.chunk.css",
+    "static/js/main.d93c0d3a.chunk.js"
+  ]
+}
