@@ -151,15 +151,15 @@ const P5SketchWithAudio = () => {
             const { time, midi  } = note;
             let xPos = Math.floor(time * 100000) / 100000;
             //two bars
-            if(parseFloat(xPos) >= parseFloat(p.barAsSeconds)){
-                while(xPos >= p.barAsSeconds){
-                    xPos = xPos - p.barAsSeconds;
+            if(parseFloat(xPos) >= parseFloat((p.barAsSeconds *2))){
+                while(xPos >= (p.barAsSeconds *2)){
+                    xPos = xPos - (p.barAsSeconds *2);
                 }
 
                 xPos = xPos > 0 ? xPos : 0;
             }
 
-            p.notePosX = (p.width/16) + (p.width  / p.barAsSeconds * xPos);
+            p.notePosX = (p.width/16) + (p.width  / (p.barAsSeconds *2) * xPos);
             p.notePosY = p.map(midi, 60, 77, (p.height/16), p.height - (p.height/16));
             p.noteHue = p.random(0, 360);
 
