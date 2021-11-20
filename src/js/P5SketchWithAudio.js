@@ -5,6 +5,7 @@ import * as p5 from "p5";
 import { Midi } from '@tonejs/midi'
 import PlayIcon from './functions/PlayIcon.js';
 import Particle from './classes/Particle.js';
+import Flower from './classes/Flower.js';
 
 import audio from "../audio/sakura-no-1.ogg";
 import midi from "../audio/sakura-no-1.mid";
@@ -37,6 +38,7 @@ const P5SketchWithAudio = () => {
         p.notePosX = 0;
         p.notePosY = 0;
         p.noteHue = 0;
+        p.flowers = [];
 
         p.loadMidi = () => {
             Midi.fromUrl(midi).then(
@@ -46,7 +48,7 @@ const P5SketchWithAudio = () => {
                     p.scheduleCueSet(noteSet1, 'executeCueSet1');
                     p.audioLoaded = true;
                     document.getElementById("loader").classList.add("loading--complete");
-                    document.getElementById("play-icon").classList.remove("fade-out");
+                    //document.getElementById("play-icon").classList.remove("fade-out");
                 }
             );
             
@@ -73,7 +75,7 @@ const P5SketchWithAudio = () => {
         } 
 
         p.setup = () => {
-            p.colorMode(p.HSB, 360);
+            p.colorMode(p.HSB, 360, 100, 100, 100);
             p.canvas = p.createCanvas(p.canvasWidth, p.canvasHeight);
             p.background(0);
             p.smooth();
@@ -111,7 +113,7 @@ const P5SketchWithAudio = () => {
                     p.particlesArray[i].pos.add(p.particlesArray[i].vel);
                     p.particlesArray[i].acc.mult(0);
 
-                    p.stroke(p.particlesArray[i].h, 360, 360);
+                    p.stroke(p.particlesArray[i].h, 100, 100);
                     p.strokeWeight(p.particlesArray[i].size);
                     p.line(
                         p.particlesArray[i].lastPos.x, 
@@ -127,11 +129,20 @@ const P5SketchWithAudio = () => {
                     }
                 }
 
+                for (var i = 0; i < p.flowers.length; i++) {
+                    p.flowers[i].draw();
+                    p.flowers[i].update();
+                    if (p.flowers[i].size > 80) {
+                        p.flowers.splice(i, 1);
+                    }
+                }
+
                 p.globalHue += 0.15;
                 if (p.globalHue > 330) {
                     p.globalHue = 270;
                 }
             }
+
         }
 
         p.barAsTicks = 61440;
@@ -140,7 +151,7 @@ const P5SketchWithAudio = () => {
             const { time, midi  } = note;
             let xPos = Math.floor(time * 100000) / 100000;
             //two bars
-            if(parseFloat(xPos) >= parseFloat(p.barAsSeconds * 2)){
+            if(parseFloat(xPos) >= parseFloat(p.barAsSeconds)){
                 while(xPos >= p.barAsSeconds){
                     xPos = xPos - p.barAsSeconds;
                 }
@@ -148,11 +159,13 @@ const P5SketchWithAudio = () => {
                 xPos = xPos > 0 ? xPos : 0;
             }
 
-            p.notePosX = (p.width/32) + (p.width / p.barAsSeconds * xPos);
-            p.notePosY = p.map(midi, 60, 77, (p.height/32), p.height - (p.height/32));
+            p.notePosX = (p.width/16) + (p.width  / p.barAsSeconds * xPos);
+            p.notePosY = p.map(midi, 60, 77, (p.height/16), p.height - (p.height/16));
             p.noteHue = p.random(0, 360);
 
-            console.log(p.notePosY);
+            p.flowers.push(
+                new Flower(p, p.notePosX, p.notePosY, p.globalHue)
+            );
         }
 
         p.mousePressed = () => {
